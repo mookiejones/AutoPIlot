@@ -271,6 +271,7 @@ $--BEC,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x.x,T,x.x,M,x.x,N,c--c*hh
        1   2 3   4 5    6    7
        |   | |   | |    |    |
 $--BOD,x.x,T,x.x,M,c--c,c--c*hh
+```
 1. Bearing Degrees, TRUE
 1. T = True
 1. Bearing Degrees, Magnetic
@@ -454,112 +455,74 @@ type 1 or 9 update, null field when DGPS is not used
 1. Differential reference station ID, 0000-1023
 1. Checksum
 
-Geographic Position, Loran-C
-12
-14
-1
-2
-3 4
-5 6
-7 8
-9 10 11|
-13|
-|
-|
-| |
-| |
-| |
-| |
-| |
-| |
+**GLC Geographic Position, Loran-C**
+```
+                                          12    14
+       1    2   3 4   5 6   7   8 9 10  11|   13|
+       |    |   | |   | |   |   | | |   | |   | |
 $--GLC,xxxx,x.x,a,x.x,a,x.x,a.x,x,a,x.x,a,x.x,a*hh
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-GLL
-GRI Microseconds/10
-Master TOA Microseconds
-Master TOA Signal Status
-Time Difference 1 Microseconds
-Time Difference 1 Signal Status
-Time Difference 2 Microseconds
-Time Difference 2 Signal Status
-Time Difference 3 Microseconds
-Time Difference 3 Signal Status
-Time Difference 4 Microseconds
-Time Difference 4 Signal Status
-Time Difference 5 Microseconds
-Time Difference 5 Signal Status
-Checksum
-Geographic Position – Latitude/Longitude
-1
-2 3
-4 5
-6 7
-|
-| |
-| |
-| |
+```
+1. GLL
+1. GRI Microseconds/10
+1. Master TOA Microseconds
+1. Master TOA Signal Status
+1. Time Difference 1 Microseconds
+1. Time Difference 1 Signal Status
+1. Time Difference 2 Microseconds
+1. Time Difference 2 Signal Status
+1. Time Difference 3 Microseconds
+1. Time Difference 3 Signal Status
+1. Time Difference 4 Microseconds
+1. Time Difference 4 Signal Status
+1. Time Difference 5 Microseconds
+1. Time Difference 5 Signal Status
+1. Checksum
+
+** GLL Geographic Position – Latitude/Longitude**
+```
+       1       2 3        4 5         6 7
+       |       | |        | |         | |
 $--GLL,llll.ll,a,yyyyy.yy,a,hhmmss.ss,A*hh
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-Latitude
-N or S (North or South)
-Longitude
-E or W (East or West)
-Time (UTC)
-Status A - Data Valid, V - Data Invalid
-Checksum
-9The NMEA 0183 Protocol
-GRS
-10
-GPS Range Residuals
+```
+1. Latitude
+1. N or S (North or South)
+1. Longitude
+1. E or W (East or West)
+1. Time (UTC)
+1. Status A - Data Valid, V - Data Invalid
+1. Checksum
+
+
+**GRS GPS Range Residuals**
 Format unknown
-GST
-GPS Pseudorange Noise Statistics
+
+**GST GPS Pseudorange Noise Statistics*
 Format unknown
-GSA
-GPS DOP and active satellites
-1 2 3
-14 15 16 17 18
-| | |
-| |
-|
-| |
+
+**GSA GPS DOP and active satellites**
+```
+
+       1 2 3                         14 15  16  17 18
+       | | |                         |  |   |   |  |
 $--GSA,a,a,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x.x,x.x,x.x*hh
+```
 1. Selection mode
 1. Mode
 1. ID of 1st satellite used for fix
 1. ID of 2nd satellite used for fix
 ...
-1. ID of 12th satellite used for fix
-1. PDOP in meters
-1. HDOP in meters
-1. VDOP in meters
-1. Checksum
-GSV
-Satellites in view
-1 2 3 4 5 6 7
-n
-| | | | | | |
-|
+14. ID of 12th satellite used for fix
+15. PDOP in meters
+16. HDOP in meters
+17. VDOP in meters
+18. Checksum
+
+**GSV Satellites in view**
+```
+       1 2 3 4 5 6 7     n
+       | | | | | | |     |
 $--GSV,x,x,x,x,x,x,x,...*hh
+```
 1. total number of messages
 1. message number
 1. satellites in view
@@ -568,167 +531,97 @@ $--GSV,x,x,x,x,x,x,x,...*hh
 1. azimuth in degrees to true
 1. SNR in dB
 more satellite infos like 1.-1.
-n) Checksum
-GTD
-Geographic Location in Time Differences
-1
-2
-3
-4
-5 6
-|
-|
-|
-|
-| |
+n. Checksum
+
+**GTD Geographic Location in Time Differences**
+```
+       1   2   3   4   5   6
+       |   |   |   |   |   |
 $--GTD,x.x,x.x,x.x,x.x,x.x*hh
-1.
-1.
-1.
-1.
-1.
-n)
-time difference
-time difference
-time difference
-time difference
-time difference
-Checksum
-GXA
-TRANSIT Position – Latitude/Longitude, Location and Time of TRANSIT Fix at Waypoint
-obsoleteThe NMEA 0183 Protocol
-HDG
-Heading – Deviation & Variation
-1
-2
-3 4
-5 6
-|
-|
-| |
-| |
+```
+1. time difference
+1. time difference
+1. time difference
+1. time difference
+1. time difference
+1. Checksum
+
+**GXA TRANSIT Position – Latitude/Longitude, Location and Time of TRANSIT Fix at Waypoint**
+obsolete
+
+**HDG Heading – Deviation & Variation**
+```
+       1   2   3 4   5 6
+       |   |   | |   | |
 $--HDG,x.x,x.x,a,x.x,a*hh
-1.
-1.
-1.
-1.
-1.
-1.
-Magnetic
-Magnetic
-Magnetic
-Magnetic
-Magnetic
-Checksum
-HDM
-Sensor heading in degrees
-Deviation, degrees
-Deviation direction, E = Easterly, W = Westerly
-Variation degrees
-Variation direction, E = Easterly, W = Westerly
-Heading – Magnetic
-1
-2 3
-|
-| |
+```
+1. Magnetic sensor heading in degrees
+1. Magnetic sensor Deviation, degrees
+1. Magnetic sensor Deviation direction, E = Easterly, W = Westerly
+1. Magnetic sensor Variation degrees
+1. Magnetic sensor Variation direction, E = Easterly, W = Westerly
+1. Checksum
+
+
+**HDM Heading -Magnetic**
+```
+       1   2 3
+       |   | |
 $--HDM,x.x,M*hh
+```
 1. Heading Degrees, magnetic
 1. M = magnetic
 1. Checksum
-HDT
-Heading – True
-1
-2 3
-|
-| |
+
+**HDT Heading – True**
+```
+       1   2 3
+       |   | |
 $--HDT,x.x,T*hh
+```
 1. Heading Degrees, true
 1. T = True
 1. Checksum
-HSC
-Heading Steering Command
-1
-2 3
-4 5
-|
-| |
-| |
+
+**HSC Heading Steering Command**
+```
+       1   2 3   4  5
+       |   | |   |  |
 $--HSC,x.x,T,x.x,M,*hh
-1.
-1.
-1.
-1.
-1.
-Heading Degrees, True
-T = True
-Heading Degrees, Magnetic
-M = Magnetic
-Checksum
-11The NMEA 0183 Protocol
-LCD
-Loran-C Signal Data
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10 11 12 13 14
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
+```
+1. Heading Degrees, True
+1. T = True
+1. Heading Degrees, Magnetic
+1. M = Magnetic
+1. Checksum
+
+**LCD Loran-C Signal Data**
+```
+       1    2   3   4   5   6   7   8   9   10  11  12  13  14
+       |    |   |   |   |   |   |   |   |   |   |   |   |   |
 $--LCD,xxxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx*hh
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-GRI Microseconds/10
-Master Relative SNR
-Master Relative ECD
-Time Difference 1 Microseconds
-Time Difference 1 Signal Status
-Time Difference 2 Microseconds
-Time Difference 2 Signal Status
-Time Difference 3 Microseconds
-Time Difference 3 Signal Status
-Time Difference 4 Microseconds
-Time Difference 4 Signal Status
-Time Difference 5 Microseconds
-Time Difference 5 Signal Status
-Checksum
-MSK
-MSK Receiver Interface (for DGPS Beacon Receivers)
-1
-2 3
-4 5 6
-|
-| |
-| | |
+```
+1. GRI Microseconds/10
+1. Master Relative SNR
+1. Master Relative ECD
+1. Time Difference 1 Microseconds
+1. Time Difference 1 Signal Status
+1. Time Difference 2 Microseconds
+1. Time Difference 2 Signal Status
+1. Time Difference 3 Microseconds
+1. Time Difference 3 Signal Status
+1. Time Difference 4 Microseconds
+1. Time Difference 4 Signal Status
+1. Time Difference 5 Microseconds
+1. Time Difference 5 Signal Status
+1. Checksum
+
+**MSK MSK Receiver Interface (for DGPS Beacon Receivers)**
+```
+       1     2  3   4  5 6
+       |     |  |   |  | |
 $GPMSK,xxx.x,xx,xxx,xx,N*hh
+```
 1. Frequency in kHz (283.5 to 325.1.
 1. Frequency Selection
 M1 = Manual
@@ -739,89 +632,60 @@ M2 = Manual
 A2 = Automatic (field 3 empty)
 1. Period of output of performance status message, 0 to 100 seconds ($CRMSS)
 1. Checksum
-MSS
-MSK Receiver Signal Status
+
+**MSS MSK Receiver Signal Status**
 Format unknown
-MWD
-Wind Direction & Speed
+
+**MWD Wind Direction & Speed**
 Format unknown
-MTW
-Water Temperature
-1
-2 3
-|
-| |
+
+**MTW Water Temperature**
+```
+       1   2 3
+       |   | |
 $--MTW,x.x,C*hh
+```
 1. Degrees
 1. Unit of Measurement, Celcius
 1. Checksum
-12The NMEA 0183 Protocol
-MWV
-Wind Speed and Angle
-1
-2 3
-4 5
-|
-| |
-| |
+
+**MWV Wind Speed and Angle**
+```
+       1   2 3   4 5
+       |   | |   | |
 $--MWV,x.x,a,x.x,a*hh
-1.
-1.
-1.
-1.
-1.
-1.
-Wind Angle, 0 to 360 degrees
-Reference, R = Relative, T = True
-Wind Speed
-Wind Speed Units, K/M/N
-Status, A = Data Valid
-Checksum
-OLN
-Omega Lane Numbers
+```
+1. Wind Angle, 0 to 360 degrees
+1. Reference, R = Relative, T = True
+1. Wind Speed
+1. Wind Speed Units, K/M/N
+1. Status, A = Data Valid
+1. Checksum
+
+**OLN Omega Lane Numbers**
 obsolete
-OSD
-Own Ship Data
-1
-2 3
-4 5
-6 7
-8
-9 10
-|
-| |
-| |
-| |
-|
-| |
+
+**OSD Own Ship Data**
+```
+       1   2 3   4 5   6 7   8   9 10
+       |   | |   | |   | |   |   | |
 $--OSD,x.x,A,x.x,a,x.x,a,x.x,x.x,a*hh
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-1.
-Heading, degrees true
-Status, A = Data Valid
-Vessel Course, degrees True
-Course Reference
-Vessel Speed
-Speed Reference
-Vessel Set, degrees True
-Vessel drift (speed)
-Speed Units
-Checksum
-ROO
-Waypoints in Active Route
-1
-n
-|
-|
+```
+1. Heading, degrees true
+1. Status, A = Data Valid
+1. Vessel Course, degrees True
+1. Course Reference
+1. Vessel Speed
+1. Speed Reference
+1. Vessel Set, degrees True
+1. Vessel drift (speed)
+1. Speed Units
+1. Checksum
+
+**ROO Waypoints in Active Route**
+```
 $--ROO,c---c,c---c,....*hh
+```
 1. waypoint ID
 ...
 n) checksum
