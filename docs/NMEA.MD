@@ -23,7 +23,7 @@ occupations. The NMEA 0183 standard defines an electrical interface and data pro
 communications between marine instrumentation.
 
 NMEA 0183 is a voluntary industry standard, first released in March of 1983. It has been updated from
-time to time; the latest release, currently (August 2001) Version 3.0, July 2001, is available from the
+time to time; the latest release, currently (August 1. Version 3.0, July 2001, is available from the
 NMEA office (Warning: the price for non-members is 250 US$).
 
     P O Box 3435
@@ -40,11 +40,12 @@ NMEA 2000 is expected in 2001.
 ## 2. Electrical Interface  <a id="electrical"></a>
 NMEA 0183 devices are designated as either talkers or listeners (with some devices being both),
 employing an asynchronous serial interface with the following parameters:
-    Baud rate: 4800
-    Number of data bits: 8 (bit 7 is 0)
-    Stop bits: 1 (or more)
-    Parity: none
-    Handshake: none
+  
+**Baud rate**: 4800  
+**Number of data bits**: 8 (bit 7 is 1.  
+**Stop bits**: 1 (or more)  
+**Parity**: none  
+**Handshake**: none  
 
 NMEA 0183 allows a single talker and several listeners on one circuit. The recommended interconnect
 wiring is a shielded twisted pair, with the shield grounded only at the talker. The standard dos not specify
@@ -109,7 +110,7 @@ where the "CC" device (computer) is requesting from the "GP" device (a GPS unit)
 The GPS will then transmit this sentence once per second until a different query is requested.
 
 ## 4. Talker Identifiers <a id="talker-identifier"></a>
-    AG Autopilot - General
+    AG Autopilot - General  
     AP Autopilot - Magnetic
     CD Communications – Digital Selective Calling (DSC)
     CR Communications – Receiver / Beacon Receiver
@@ -169,7 +170,7 @@ $--ALM,x.x,x.x,xx,x.x,hh,hhhh,hh,hhhh,hhhh,hhhhhh,hhhhhh,hhhhhh,hhhhhh,hhh,hhh,*
 1. APA
 1. Total number of messages
 1. Message Number
-1. Satellite PRN number (01 to 32)
+1. Satellite PRN number (01 to 1.
 1. GPS Week Number: Date and time in GPS is computed as number of weeks
 1. from 6 January 1980 plus number of seconds into the week.
 1. SV health, bits 17-24 of each almanac page
@@ -186,452 +187,273 @@ $--ALM,x.x,x.x,xx,x.x,hh,hhhh,hh,hhhh,hhhh,hhhhhh,hhhhhh,hhhhhh,hhhhhh,hhh,hhh,*
 1. Checksum
 
 **APA Autopilot Sentence "A"**
-1 2 3
-4 5 6 7 8 9 10
-11
-| | |
-| | | | | | |
-|
+```
+       1 2  3   4 5 6 7  8  9 10    11
+       | |  |   | | | |  |  | |     |
 $--APA,A,A,x.xx,L,N,A,A,xxx,M,c---c*hh
-1) Status
-V = LORAN-C Blink or SNR warning
-A = general warning flag or other navigation systems when a reliable
-fix is not available
-2) Status
-V = Loran-C Cycle Lock warning flag
-A = OK or not used
-3) Cross Track Error Magnitude
-4) Direction to steer, L or R
-5) Cross Track Units (Nautic miles or kilometres)
-6) Status
+```
+1. Status  
+    V = LORAN-C Blink or SNR warning  
+    A = general warning flag or other navigation systems when a reliable fix is not available  
+1. Status  
+    V = Loran-C Cycle Lock warning flag  
+    A = OK or not used
+1. Cross Track Error Magnitude
+1. Direction to steer, L or R
+1. Cross Track Units (Nautic miles or kilometres)
+1. Status
 A = Arrival Circle Entered
-7) Status
+1. Status
 A = Perpendicular passed at waypoint
-8) Bearing origin to destination
-9) M = Magnetic, T = True
-10) Destination Waypoint ID
-11) checksum
-4The NMEA 0183 Protocol
-APB
-Autopilot Sentence "B"
-13
-15
-1 2 3
-4 5 6 7 8
-9 10
-11 12|
-14|
-| | |
-| | | | |
-| |
-|
-| |
-| |
+1. Bearing origin to destination
+1. M = Magnetic, T = True
+1. Destination Waypoint ID
+1. checksum
+
+
+**APB Autopilot Sentence "B"**  
+```
+                                        13    15
+       1 2 3   4 5 6 7 8   9 10   11 12 |   14|
+       | | |   | | | | |   | |    |   | |   | |
 $--APB,A,A,x.x,a,N,A,A,x.x,a,c--c,x.x,a,x.x,a*hh
-1) Status
+```
+1. Status
 V = LORAN-C Blink or SNR warning
 A = general warning flag or other navigation systems when a reliable
 fix is not available
-2) Status
+1. Status
 V = Loran-C Cycle Lock warning flag
 A = OK or not used
-3) Cross Track Error Magnitude
-4) Direction to steer, L or R
-5) Cross Track Units, N = Nautical Miles
-6) Status
+1. Cross Track Error Magnitude
+1. Direction to steer, L or R
+1. Cross Track Units, N = Nautical Miles
+1. Status
 A = Arrival Circle Entered
-7) Status
+1. Status
 A = Perpendicular passed at waypoint
-8) Bearing origin to destination
-9) M = Magnetic, T = True
-10) Destination Waypoint ID
-11) Bearing, present position to Destination
-12) M = Magnetic, T = True
-13) Heading to steer to destination waypoint
-14) M = Magnetic, T = True
-15) Checksum
-ASD
-Autopilot System Data
+1. Bearing origin to destination
+1. M = Magnetic, T = True
+1. Destination Waypoint ID
+1. Bearing, present position to Destination
+1. M = Magnetic, T = True
+1. Heading to steer to destination waypoint
+1. M = Magnetic, T = True
+1. Checksum
+
+**ASD Autopilot System Data**
 Format unknown
-BEC
-Bearing & Distance to Waypoint – Dead Reckoning
-12
-1
-2
-3 4
-5 6
-7 8
-9 10 11|
-13
-|
-|
-| |
-| |
-| |
-| |
-| |
-|
+
+**BEC Bearing & Distance to Waypoint – Dead Reckoning**
+```
+                                                        12
+       1         2       3 4        5 6   7 8   9 10  11|    13
+       |         |       | |        | |   | |   | |   | |    |
 $--BEC,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x.x,T,x.x,M,x.x,N,c--c*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
-10)
-11)
-12)
-13)
-Time (UTC)
-Waypoint Latitude
-N = North, S = South
-Waypoint Longitude
-E = East, W = West
-Bearing, True
-T = True
-Bearing, Magnetic
-M = Magnetic
-Nautical Miles
-N = Nautical Miles
-Waypoint ID
-Checksum
-5The NMEA 0183 Protocol
-BOD
-Bearing – Waypoint to Waypoint
-1
-2 3
-4 5
-6
-7
-|
-| |
-| |
-|
-|
+```
+1. Time (UTC)
+1. Waypoint Latitude
+1. N = North, S = South
+1. Waypoint Longitude
+1. E = East, W = West
+1. Bearing, True
+1. T = True
+1. Bearing, Magnetic
+1. M = Magnetic
+1. Nautical Miles
+1. N = Nautical Miles
+1. Waypoint ID
+1. Checksum
+
+**BOD Bearing – Waypoint to Waypoint**
+```
+
+       1   2 3   4 5    6    7
+       |   | |   | |    |    |
 $--BOD,x.x,T,x.x,M,c--c,c--c*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-Bearing Degrees, TRUE
-T = True
-Bearing Degrees, Magnetic
-M = Magnetic
-TO Waypoint
-FROM Waypoint
-Checksum
-BWC
-Bearing and Distance to Waypoint – Latitude, N/S, Longitude, E/W, UTC, Status
-11
-1
-2
-3 4
-5 6
-7 8
-9 10 | 12
-13
-|
-|
-| |
-| |
-| |
-| |
-| |
-|
+1. Bearing Degrees, TRUE
+1. T = True
+1. Bearing Degrees, Magnetic
+1. M = Magnetic
+1. TO Waypoint
+1. FROM Waypoint
+1. Checksum
+
+**BWC Bearing and Distance to Waypoint – Latitude, N/S, Longitude, E/W, UTC, Status**
+```                 
+                                                      11
+       1         2       3 4        5 6   7 8   9 10  | 12   13
+       |         |       | |        | |   | |   | |   | |    |
 $--BWC,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x.x,T,x.x,M,x.x,N,c--c*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
-10)
-11)
-12)
-13)
-Time (UTC)
-Waypoint Latitude
-N = North, S = South
-Waypoint Longitude
-E = East, W = West
-Bearing, True
-T = True
-Bearing, Magnetic
-M = Magnetic
-Nautical Miles
-N = Nautical Miles
-Waypoint ID
-Checksum
-BWR
-Bearing and Distance to Waypoint – Rhumb Line Latitude, N/S, Longitude, E/W,
-UTC, Status
-11
-1
-2
-3 4
-5 6
-7 8
-9 10 | 12
-13
-|
-|
-| |
-| |
-| |
-| |
-| |
-|
+```
+1. Time (UTC)
+1. Waypoint Latitude
+1. N = North, S = South
+1. Waypoint Longitude
+1. E = East, W = West
+1. Bearing, True
+1. T = True
+1. Bearing, Magnetic
+1. M = Magnetic
+1. Nautical Miles
+1. N = Nautical Miles
+1. Waypoint ID
+1. Checksum
+
+
+**BWR Bearing and Distance to Waypoint – Rhumb Line Latitude, N/S, Longitude, E/W,UTC, Status**
+```  
+                                                      11
+       1         2       3 4        5 6   7 8   9 10  | 12   13
+       |         |       | |        | |   | |   | |   | |    |
 $--BWR,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x.x,T,x.x,M,x.x,N,c--c*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
-10)
-11)
-12)
-13)
-Time (UTC)
-Waypoint Latitude
-N = North, S = South
-Waypoint Longitude
-E = East, W = West
-Bearing, True
-T = True
-Bearing, Magnetic
-M = Magnetic
-Nautical Miles
-N = Nautical Miles
-Waypoint ID
-Checksum
-6The NMEA 0183 Protocol
-BWW
-Bearing – Waypoint to Waypoint
-1
-2 3
-4 5
-6
-7
-|
-| |
-| |
-|
-|
+
+```
+1. Time (UTC)
+1. Waypoint Latitude
+1. N = North, S = South
+1. Waypoint Longitude
+1. E = East, W = West
+1. Bearing, True
+1. T = True
+1. Bearing, Magnetic
+1. M = Magnetic
+1. Nautical Miles
+1. N = Nautical Miles
+1. Waypoint ID
+1. Checksum
+
+**BWW Bearing – Waypoint to Waypoint**
+```
+
+       1   2 3   4 5    6    7
+       |   | |   | |    |    | 
 $--BWW,x.x,T,x.x,M,c--c,c--c*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-Bearing Degrees, TRUE
-T = True
-Bearing Degrees, Magnetic
-M = Magnetic
-TO Waypoint
-FROM Waypoint
-Checksum
-DBK
-Depth Below Keel
-1
-2 3
-4 5
-6 7
-|
-| |
-| |
-| |
+```
+1. Bearing Degrees, TRUE
+1. T = True
+1. Bearing Degrees, Magnetic
+1. M = Magnetic
+1. TO Waypoint
+1. FROM Waypoint
+1. Checksum
+
+**DBK Depth Below Keel**
+```
+       1   2 3   4 5   6 7
+       |   | |   | |   | |
 $--DBK,x.x,f,x.x,M,x.x,F*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-Depth, feet
-f = feet
-Depth, meters
-M = meters
-Depth, Fathoms
-F = Fathoms
-Checksum
-DBS
-Depth Below Surface
-1
-2 3
-4 5
-6 7
-|
-| |
-| |
-| |
+```
+1. Depth, feet
+1. f = feet
+1. Depth, meters
+1. M = meters
+1. Depth, Fathoms
+1. F = Fathoms
+1. Checksum
+
+**DBS Depth Below Surface**
+```
+       1   2 3   4 5   6 7
+       |   | |   | |   | |
 $--DBS,x.x,f,x.x,M,x.x,F*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-Depth, feet
-f = feet
-Depth, meters
-M = meters
-Depth, Fathoms
-F = Fathoms
-Checksum
-DBT
-Depth Below Transducer
-1
-2 3
-4 5
-6 7
-|
-| |
-| |
-| |
+```
+1. Depth, feet
+1. f = feet
+1. Depth, meters
+1. M = meters
+1. Depth, Fathoms
+1. F = Fathoms
+1. Checksum
+
+**DBT Depth Below Transducer**
+```
+       1   2 3   4 5   6 7
+       |   | |   | |   | |
 $--DBT,x.x,f,x.x,M,x.x,F*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-Depth, feet
-f = feet
-Depth, meters
-M = meters
-Depth, Fathoms
-F = Fathoms
-Checksum
-DCN
-Decca Position
+```
+1. Depth, feet
+1. f = feet
+1. Depth, meters
+1. M = meters
+1. Depth, Fathoms
+1. F = Fathoms
+1. Checksum
+
+**DCN Decca Position**
 obsolete
-7The NMEA 0183 Protocol
-DPT
-Heading – Deviation & Variation
-1
-2
-3
-|
-|
-|
+
+**DPT Heading – Deviation & Variation**
+```
+       1   2   3
+       |   |   |
 $--DPT,x.x,x.x*hh
-1) Depth, meters
-2) Offset from transducer;
+``
+1. Depth, meters
+1. Offset from transducer;
 positive means distance from transducer to water line,
 negative means distance from transducer to keel
-3) Checksum
-DSC
-Digital Selective Calling Information
+1. Checksum
+
+**DSC Digital Selective Calling Information**
 Format unknown
-DSE
-Extended DSC
+
+**DSE Extended DSC**
 Format unknown
-DSI
-DSC Transponder Initiate
+
+**DSI DSC Transponder Initiate**
 Format unknown
-DSR
-DSC Transponder Response
+
+**DSR DSC Transponder Response**
 Format unknown
-DTM
-Datum Reference
+
+**DTM Datum Reference**
 Format unknown
-FSI
-Frequency Set Information
-1
-2
-3 4 5
-|
-|
-| | |
+
+**FSI Frequency Set Information**
+```
+       1      2      3 4 5
+       |      |      | | |
 $--FSI,xxxxxx,xxxxxx,c,x*hh
-1)
-2)
-3)
-4)
-5)
-Transmitting Frequency
-Receiving Frequency
-Communications Mode (NMEA Syntax 2)
-Power Level
-Checksum
-GBS
-GPS Satellite Fault Detection
+```
+1. Transmitting Frequency
+1. Receiving Frequency
+1. Communications Mode (NMEA Syntax 1.
+1. Power Level
+1. Checksum
+
+**GBS GPS Satellite Fault Detection*
 Format unknown
-8The NMEA 0183 Protocol
-GGA
-Global Positioning System Fix Data. Time, Position and fix related data
-for a GPS receiver
-11
-1
-2
-3 4
-5 6 7 8
-9 10 | 12 13 14
-15
-|
-|
-| |
-| | | |
-|
-| |
-| |
-|
-|
+
+**GGA Global Positioning System Fix Data. Time, Position and fix related data for a GPS receiver**
+```
+                                                     11    13
+       1         2       3 4        5 6 7  8   9   10|   12|   14   15
+       |         |       | |        | | |  |   |   | |   | |   |    |
 $--GGA,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x,xx,x.x,x.x,M,x.x,M,x.x,xxxx*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
-10)
-11)
-12)
-13)
-14)
-15)
-GLC
-Time (UTC)
-Latitude
-N or S (North or South)
-Longitude
-E or W (East or West)
-GPS Quality Indicator,
+```
+1. GLC
+1. Time (UTC)
+1. Latitude
+1. N or S (North or South)
+1. Longitude
+1. E or W (East or West)
+1. GPS Quality Indicator,
 0 - fix not available,
 1 - GPS fix,
 2 - Differential GPS fix
-Number of satellites in view, 00 - 12
-Horizontal Dilution of precision
-Antenna Altitude above/below mean-sea-level (geoid)
-Units of antenna altitude, meters
-Geoidal separation, the difference between the WGS-84 earth
-ellipsoid and mean-sea-level (geoid), "-" means mean-sea-level below ellipsoid
-Units of geoidal separation, meters
-Age of differential GPS data, time in seconds since last SC104
+1. Number of satellites in view, 00 - 12
+1. Horizontal Dilution of precision
+1. Antenna Altitude above/below mean-sea-level (geoid)
+1. Units of antenna altitude, meters
+1. Geoidal separation, the difference between the WGS-84 earth
+1. ellipsoid and mean-sea-level (geoid), "-" means mean-sea-level below ellipsoid
+1. Units of geoidal separation, meters
+1. Age of differential GPS data, time in seconds since last SC104
 type 1 or 9 update, null field when DGPS is not used
-Differential reference station ID, 0000-1023
-Checksum
+1. Differential reference station ID, 0000-1023
+1. Checksum
+
 Geographic Position, Loran-C
 12
 14
@@ -651,20 +473,20 @@ Geographic Position, Loran-C
 | |
 | |
 $--GLC,xxxx,x.x,a,x.x,a,x.x,a.x,x,a,x.x,a,x.x,a*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
-10)
-11)
-12)
-13)
-14)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 GLL
 GRI Microseconds/10
 Master TOA Microseconds
@@ -690,13 +512,13 @@ Geographic Position – Latitude/Longitude
 | |
 | |
 $--GLL,llll.ll,a,yyyyy.yy,a,hhmmss.ss,A*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Latitude
 N or S (North or South)
 Longitude
@@ -721,16 +543,16 @@ GPS DOP and active satellites
 |
 | |
 $--GSA,a,a,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x.x,x.x,x.x*hh
-1) Selection mode
-2) Mode
-3) ID of 1st satellite used for fix
-4) ID of 2nd satellite used for fix
+1. Selection mode
+1. Mode
+1. ID of 1st satellite used for fix
+1. ID of 2nd satellite used for fix
 ...
-14) ID of 12th satellite used for fix
-15) PDOP in meters
-16) HDOP in meters
-17) VDOP in meters
-18) Checksum
+1. ID of 12th satellite used for fix
+1. PDOP in meters
+1. HDOP in meters
+1. VDOP in meters
+1. Checksum
 GSV
 Satellites in view
 1 2 3 4 5 6 7
@@ -738,14 +560,14 @@ n
 | | | | | | |
 |
 $--GSV,x,x,x,x,x,x,x,...*hh
-1) total number of messages
-2) message number
-3) satellites in view
-4) satellite number
-5) elevation in degrees
-6) azimuth in degrees to true
-7) SNR in dB
-more satellite infos like 4)-7)
+1. total number of messages
+1. message number
+1. satellites in view
+1. satellite number
+1. elevation in degrees
+1. azimuth in degrees to true
+1. SNR in dB
+more satellite infos like 1.-1.
 n) Checksum
 GTD
 Geographic Location in Time Differences
@@ -760,11 +582,11 @@ Geographic Location in Time Differences
 |
 | |
 $--GTD,x.x,x.x,x.x,x.x,x.x*hh
-1)
-2)
-3)
-4)
-5)
+1.
+1.
+1.
+1.
+1.
 n)
 time difference
 time difference
@@ -786,12 +608,12 @@ Heading – Deviation & Variation
 | |
 | |
 $--HDG,x.x,x.x,a,x.x,a*hh
-1)
-2)
-3)
-4)
-5)
-6)
+1.
+1.
+1.
+1.
+1.
+1.
 Magnetic
 Magnetic
 Magnetic
@@ -810,9 +632,9 @@ Heading – Magnetic
 |
 | |
 $--HDM,x.x,M*hh
-1) Heading Degrees, magnetic
-2) M = magnetic
-3) Checksum
+1. Heading Degrees, magnetic
+1. M = magnetic
+1. Checksum
 HDT
 Heading – True
 1
@@ -820,9 +642,9 @@ Heading – True
 |
 | |
 $--HDT,x.x,T*hh
-1) Heading Degrees, true
-2) T = True
-3) Checksum
+1. Heading Degrees, true
+1. T = True
+1. Checksum
 HSC
 Heading Steering Command
 1
@@ -832,11 +654,11 @@ Heading Steering Command
 | |
 | |
 $--HSC,x.x,T,x.x,M,*hh
-1)
-2)
-3)
-4)
-5)
+1.
+1.
+1.
+1.
+1.
 Heading Degrees, True
 T = True
 Heading Degrees, Magnetic
@@ -870,20 +692,20 @@ Loran-C Signal Data
 |
 |
 $--LCD,xxxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx,xxx*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
-10)
-11)
-12)
-13)
-14)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 GRI Microseconds/10
 Master Relative SNR
 Master Relative ECD
@@ -907,16 +729,16 @@ MSK Receiver Interface (for DGPS Beacon Receivers)
 | |
 | | |
 $GPMSK,xxx.x,xx,xxx,xx,N*hh
-1) Frequency in kHz (283.5 to 325.0)
-2) Frequency Selection
+1. Frequency in kHz (283.5 to 325.1.
+1. Frequency Selection
 M1 = Manual
 A1 = Automatic (field 1 empty)
-3) MSK bit rate (100 or 200)
-4) Bit Rate Selection
+1. MSK bit rate (100 or 1.
+1. Bit Rate Selection
 M2 = Manual
 A2 = Automatic (field 3 empty)
-5) Period of output of performance status message, 0 to 100 seconds ($CRMSS)
-6) Checksum
+1. Period of output of performance status message, 0 to 100 seconds ($CRMSS)
+1. Checksum
 MSS
 MSK Receiver Signal Status
 Format unknown
@@ -930,9 +752,9 @@ Water Temperature
 |
 | |
 $--MTW,x.x,C*hh
-1) Degrees
-2) Unit of Measurement, Celcius
-3) Checksum
+1. Degrees
+1. Unit of Measurement, Celcius
+1. Checksum
 12The NMEA 0183 Protocol
 MWV
 Wind Speed and Angle
@@ -943,12 +765,12 @@ Wind Speed and Angle
 | |
 | |
 $--MWV,x.x,a,x.x,a*hh
-1)
-2)
-3)
-4)
-5)
-6)
+1.
+1.
+1.
+1.
+1.
+1.
 Wind Angle, 0 to 360 degrees
 Reference, R = Relative, T = True
 Wind Speed
@@ -973,16 +795,16 @@ Own Ship Data
 |
 | |
 $--OSD,x.x,A,x.x,a,x.x,a,x.x,x.x,a*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
-10)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Heading, degrees true
 Status, A = Data Valid
 Vessel Course, degrees True
@@ -1000,7 +822,7 @@ n
 |
 |
 $--ROO,c---c,c---c,....*hh
-1) waypoint ID
+1. waypoint ID
 ...
 n) checksum
 RMA
@@ -1022,18 +844,18 @@ Recommended Minimum Navigation Information
 |
 | |
 $--RMA,A,llll.ll,a,yyyyy.yy,a,x.x,x.x,x.x,x.x,x.x,a*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
-10)
-11)
-12)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Blink Warning
 Latitude
 N or S
@@ -1066,20 +888,20 @@ Recommended Minimum Navigation Information
 |
 | |
 $--RMB,A,x.x,a,c--c,c--c,llll.ll,a,yyyyy.yy,a,x.x,x.x,x.x,A*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
-10)
-11)
-12)
-13)
-14)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Status, V = Navigation receiver warning
 Cross Track error - nautical miles
 Direction to Steer, Left or Right
@@ -1113,18 +935,18 @@ Recommended Minimum Navigation Information
 |
 | |
 $--RMC,hhmmss.ss,A,llll.ll,a,yyyyy.yy,a,x.x,x.x,xxxx,x.x,a*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
-10)
-11)
-12)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Time (UTC)
 Status, V = Navigation receiver warning
 Latitude
@@ -1144,9 +966,9 @@ Rate Of Turn
 |
 | |
 $--ROT,x.x,A*hh
-1) Rate Of Turn, degrees per minute, "-" means bow turns to port
-2) Status, A means data is valid
-3) Checksum
+1. Rate Of Turn, degrees per minute, "-" means bow turns to port
+1. Status, A means data is valid
+1. Checksum
 RPM
 Revolutions
 1 2 3
@@ -1156,12 +978,12 @@ Revolutions
 |
 | |
 $--RPM,a,x,x.x,x.x,A*hh
-1)
-2)
-3)
-4)
-5)
-6)
+1.
+1.
+1.
+1.
+1.
+1.
 Source; S = Shaft, E = Engine
 Engine or shaft number
 Speed, Revolutions per minute
@@ -1178,11 +1000,11 @@ Rudder Sensor Angle
 | |
 | |
 $--RSA,x.x,A,x.x,A*hh
-1)
-2)
-3)
-4)
-5)
+1.
+1.
+1.
+1.
+1.
 Starboard (or single) rudder sensor, "-" means Turn To Port
 Status, A means data is valid
 Port rudder sensor
@@ -1214,11 +1036,11 @@ RADAR System Data
 |
 | | |
 $--RSD,x.x,x.x,x.x,x.x,x.x,x.x,x.x,x.x,x.x,x.x,x.x,a,a*hh
-9)
-10)
-11)
-12)
-14)
+1.
+1.
+1.
+1.
+1.
 RTE
 Cursor Range From Own Ship
 Cursor Bearing Degrees Clockwise From Zero
@@ -1239,13 +1061,13 @@ n
 |
 |
 $--RTE,x.x,x.x,a,c--c,c--c, ..... c--c*hh
-1) Total number of messages being transmitted
-2) Message Number
-3) Message mode
+1. Total number of messages being transmitted
+1. Message Number
+1. Message mode
 c = complete route, all waypoints
 w = working route, the waypoint you just left, the waypoint you're heading to,
 then all the rest
-4) Waypoint ID
+1. Waypoint ID
 x) More Waypoints
 n) Checksum
 SFI
@@ -1261,10 +1083,10 @@ n
 |
 |
 $--SFI,x.x,x.x,xxxxxx,c .......... xxxxxx,c*hh
-1)
-2)
-3)
-4)
+1.
+1.
+1.
+1.
 n)
 Total Number Of Messages
 Message Number
@@ -1278,8 +1100,8 @@ Multiple Data ID
 |
 |
 $--STN,x.x,*hh
-1) Talker ID Number
-2) Checksum
+1. Talker ID Number
+1. Checksum
 15The NMEA 0183 Protocol
 TLL
 Target Latitude and Longitude
@@ -1308,20 +1130,20 @@ Tracked Target Message
 | |
 | | |
 $--TTM,xx,x.x,x.x,a,x.x,x.x,a,x.x,x.x,a,c--c,a,a*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
-10)
-11)
-12)
-13)
-14)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Target Number
 Target Distance
 Bearing from own ship
@@ -1349,13 +1171,13 @@ Dual Ground/Water Speed
 |
 | |
 $--VBW,x.x,x.x,A,x.x,x.x,A*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Longitudinal water speed, "-" means astern
 Transverse water speed, "-" means port
 Status, A = data valid
@@ -1374,13 +1196,13 @@ Set and Drift
 | |
 | |
 $--VDR,x.x,T,x.x,M,x.x,N*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Degress True
 T = True
 Degrees Magnetic
@@ -1402,15 +1224,15 @@ Water Speed and Heading
 | |
 | |
 $--VHW,x.x,T,x.x,M,x.x,N,x.x,K*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Degress True
 T = True
 Degrees Magnetic
@@ -1429,11 +1251,11 @@ Distance Traveled through Water
 | |
 | |
 $--VLW,x.x,N,x.x,N*hh
-1)
-2)
-3)
-4)
-5)
+1.
+1.
+1.
+1.
+1.
 Total cumulative distance
 N = Nautical Miles
 Distance since Reset
@@ -1448,11 +1270,11 @@ Speed – Measured Parallel to Wind
 | |
 | |
 $--VPW,x.x,N,x.x,M*hh
-1)
-2)
-3)
-4)
-5)
+1.
+1.
+1.
+1.
+1.
 Speed, "-" means downwind
 N = Knots
 Speed, "-" means downwind
@@ -1469,15 +1291,15 @@ Track Made Good and Ground Speed
 | | | |
 | |
 $--VTG,x.x,T,x.x,M,x.x,N,x.x,K*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Track Degrees
 T = True
 Track Degrees
@@ -1494,15 +1316,15 @@ Relative Wind Speed and Angle
 1 2 3 4 5 6 7 8 9
 | | | | | | | | |
 $--VWR,x.x,a,x.x,N,x.x,M,x.x,K*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Wind direction
 Wind direction
 Speed
@@ -1525,10 +1347,10 @@ Waypoint Closure Velocity
 | |
 |
 $--WCV,x.x,N,c--c*hh
-1)
-2)
-3)
-4)
+1.
+1.
+1.
+1.
 Velocity
 N = knots
 Waypoint ID
@@ -1552,13 +1374,13 @@ Distance – Waypoint to Waypoint
 |
 |
 $--WNC,x.x,N,x.x,K,c--c,c--c*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Distance, Nautical Miles
 N = Nautical Miles
 Distance, Kilometers
@@ -1577,12 +1399,12 @@ Waypoint Location
 | |
 |
 $--WPL,llll.ll,a,yyyyy.yy,a,c--c*hh
-1)
-2)
-3)
-4)
-5)
-6)
+1.
+1.
+1.
+1.
+1.
+1.
 Latitude
 N or S (North or South)
 Longitude
@@ -1598,10 +1420,10 @@ n
 | |
 |
 $--XDR,a,x.x,a,c--c, ..... *hh
-1)
-2)
-3)
-4)
+1.
+1.
+1.
+1.
 x)
 n)
 Transducer type
@@ -1617,17 +1439,17 @@ Cross-Track Error – Measured
 | | |
 | | |
 $--XTE,A,A,x.x,a,N,*hh
-1) Status
+1. Status
 V = LORAN-C blink or SNR warning
 A = general warning flag or other navigation systems when a reliable
 fix is not available
-2) Status
+1. Status
 V = Loran-C cycle lock warning flag
 A = OK or not used
-3) Cross track error magnitude
-4) Direction to steer, L or R
-5) Cross track units. N = Nautical Miles
-6) Checksum
+1. Cross track error magnitude
+1. Direction to steer, L or R
+1. Cross track units. N = Nautical Miles
+1. Checksum
 XTR
 Cross Track Error – Dead Reckoning
 1
@@ -1635,10 +1457,10 @@ Cross Track Error – Dead Reckoning
 |
 | | |
 $--XTR,x.x,a,N*hh
-1)
-2)
-3)
-4)
+1.
+1.
+1.
+1.
 Magnitude of cross track error
 Direction to steer, L or R
 Units, N = Nautical Miles
@@ -1652,13 +1474,13 @@ Time & Date – UTC, Day, Month, Year and Local Time Zone
 | | |
 | | |
 $--ZDA,hhmmss.ss,xx,xx,xxxx,xx,xx*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Local zone minutes description, same sign as local hours
 Local zone description, 00 to +/- 13 hours
 Year
@@ -1681,10 +1503,10 @@ UTC & Time from Origin Waypoint
 |
 |
 $--ZFO,hhmmss.ss,hhmmss.ss,c--c*hh
-1)
-2)
-3)
-4)
+1.
+1.
+1.
+1.
 Time (UTC)
 Elapsed Time
 Origin Waypoint ID
@@ -1700,10 +1522,10 @@ UTC & Time to Destination Waypoint
 |
 |
 $--ZTG,hhmmss.ss,hhmmss.ss,c--c*hh
-1)
-2)
-3)
-4)
+1.
+1.
+1.
+1.
 Time (UTC)
 Time Remaining
 Destination Waypoint ID
@@ -1728,25 +1550,25 @@ Garmin proprietary sentence
 |
 | | | | |
 $PGRMC,A,x.x,hh,x.x,x.x,x.x,x.x,x.x,c,c,2,c*hh
-1) Fix mode, A=automatic (only option)
-2) Altitude above/below mean sea level, -1500.0 to 18000.0 meters
-3) Earth datum index. If the user datum index (96) is specified,
+1. Fix mode, A=automatic (only option)
+1. Altitude above/below mean sea level, -1500.0 to 18000.0 meters
+1. Earth datum index. If the user datum index (1. is specified,
 fields 5-8 must contain valid values. Otherwise, fields 4-8 must be null.
-4) User earth datum semi-major axis, 6360000.0 to 6380000.0 meters (.001 meters
+1. User earth datum semi-major axis, 6360000.0 to 6380000.0 meters (.001 meters
 resolution)
-5) User earth datum inverse flattening factor, 285.0 to 310.0 (10-9 resolution)
-6) User earth datum delta x earth centered coordinate, -5000.0 to 5000.0 meters
+1. User earth datum inverse flattening factor, 285.0 to 310.0 (10-9 resolution)
+1. User earth datum delta x earth centered coordinate, -5000.0 to 5000.0 meters
 (1 meter resolution)
-7) User earth datum delta y earth centered coordinate, -5000.0 to 5000.0 meters
+1. User earth datum delta y earth centered coordinate, -5000.0 to 5000.0 meters
 (1 meter resolution)
-8) User earth datum delta z earth centered coordinate, -5000.0 to 5000.0 meters
+1. User earth datum delta z earth centered coordinate, -5000.0 to 5000.0 meters
 (1 meter resolution)
-9) Differential mode, A = automatic (output DGPS data when available, non-DGPs
+1. Differential mode, A = automatic (output DGPS data when available, non-DGPs
 otherwise), D = differential exclusively (output only differential fixes)
-10) NMEA Baud rate, 1 = 1200, 2 = 2400, 3 = 4800, 4 = 9600
-11) Filter mode, 2 = no filtering (only option)
-12) PPS mode, 1 = No PPS, 2 = 1 Hz
-13) Checksum
+1. NMEA Baud rate, 1 = 1200, 2 = 2400, 3 = 4800, 4 = 9600
+1. Filter mode, 2 = no filtering (only option)
+1. PPS mode, 1 = No PPS, 2 = 1 Hz
+1. Checksum
 $PGRME Estimated Position Error
 Garmin proprietary sentence
 1
@@ -1758,13 +1580,13 @@ Garmin proprietary sentence
 | |
 | |
 $PGRME,x.x,M,x.x,M,x.x,M*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Estimated horizontal position error (HPE)
 Unit, metres
 Estimated vertical error (VPE)
@@ -1797,24 +1619,24 @@ Garmin proprietary sentence
 |
 | | |
 $PGRMF,x.x,x.x,ddmmyy,hhmmss,x.x,ddmm.mmmm,c,dddmm.mmmm,c,c,c,x.x,x.x,c,c*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
-9)
-10)
-11)
-12)
-13)
-14)
-15)
-16)
-GPS week number (0 - 1023)
-GPS seconds (0 - 604799)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+1.
+GPS week number (0 - 1.
+GPS seconds (0 - 1.
 UTC date of position fix
 UTC time of position fix
 GPS leap second count
@@ -1847,13 +1669,13 @@ Garmin proprietary sentence
 |
 |
 $PGRMI,ddmm.mmm,N,ddmm.mmm,E,ddmmyy,hhmmss*hh
-1)
-2)
-3)
-4)
-5)
-6)
-7)
+1.
+1.
+1.
+1.
+1.
+1.
+1.
 Latitude
 N or S
 Longitude
@@ -1868,8 +1690,8 @@ Garmin proprietary sentence
 |
 |
 $PGRMM,c---c*hh
-1) Currently active horizontal datum (WGS-84, NAD27 Canada, ED50, a.s.o)
-2) Checksum
+1. Currently active horizontal datum (WGS-84, NAD27 Canada, ED50, a.s.o)
+1. Checksum
 22The NMEA 0183 Protocol
 $PGRMO Output Sentence Enable/Disable
 Garmin proprietary sentence
@@ -1878,13 +1700,13 @@ Garmin proprietary sentence
 |
 | |
 $PGRMO,ccccc,c*hh
-1) Target sentence description (e.g., PGRMT, GPGSV, etc.)
-2) Target sentence mode
+1. Target sentence description (e.g., PGRMT, GPGSV, etc.)
+1. Target sentence mode
 0 = disable specified sentence
 1 = enable specified sentence
 2 = disable all
 3 = enable all output sentences (except GPALM)
-3) Checksum
+1. Checksum
 $PGRMT Sensor Status Information
 Garmin proprietary sentence
 1
@@ -1894,31 +1716,31 @@ Garmin proprietary sentence
 | | | | | | |
 | |
 $PGRMT,c...c,c,c,c,c,c,c,x.x,c*hh
-1) Product, model and software version
+1. Product, model and software version
 e.g. "GPS25VEE] 1.10"
-2) Rom checksum test
+1. Rom checksum test
 P = pass
 F = fail
-3) Receiver failure discrete
+1. Receiver failure discrete
 P = pass
 F = fail
-4) Stored data lost
+1. Stored data lost
 R = retained
 L = lost
-5) Real time clock lost
+1. Real time clock lost
 R = retained
 L = lost
-6) 0scillator drift discrete
+1. 0scillator drift discrete
 P = pass
 F = excessive drift detected
-7) Data collection discrete
+1. Data collection discrete
 C = collecting
 null if not collecting
-8) Board temperature in degrees C
-9) Board configuration data
+1. Board temperature in degrees C
+1. Board configuration data
 R = retained
 L = lost
-10) Checksum
+1. Checksum
 $PGRMV 3D Velocity
 Garmin proprietary sentence
 1
@@ -1930,10 +1752,10 @@ Garmin proprietary sentence
 |
 |
 $PGRMV,x.x,x.x,x.x*hh
-1)
-2)
-3)
-4)
+1.
+1.
+1.
+1.
 True east velocity, -999.9 to 9999.9 meters/second
 True north velocity, -999.9 to 9999.9 meters/second
 Up velocity, -999.9 to 9999.9 meters/second
@@ -1946,12 +1768,12 @@ Garmin proprietary sentence
 |
 | | |
 $PGRMZ,x.x,f,h*hh
-1) Altitude
-2) Unit, feets
-3) Position fix dimensions
+1. Altitude
+1. Unit, feets
+1. Position fix dimensions
 2 user altitude
 3 GPS altitude
-4) Checksum
+1. Checksum
 $PSLIB
 Differental GPS Beacon Receiver Control
 Starlink, Inc. proprietary sentence, used by Garmin and others
@@ -1962,13 +1784,13 @@ Starlink, Inc. proprietary sentence, used by Garmin and others
 |
 | |
 $PSLIB,x.x,x.x,c*hh
-1) Frequency
-2) Bit rate
-3) Request type
+1. Frequency
+1. Bit rate
+1. Request type
 J = status request
 K = configuration request
 blank = tuning message
-4) Checksum
+1. Checksum
 24The NMEA 0183 Protocol
 7. Manufacturer Codes
 Note: This list is out-of-date, but perhaps still useful.
